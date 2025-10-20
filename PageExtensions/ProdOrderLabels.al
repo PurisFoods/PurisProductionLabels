@@ -24,7 +24,6 @@ pageextension 50200 PurisProductionLabels extends "Released Production Order"
                     end;
                 end;
             }
-
         }
     }
 
