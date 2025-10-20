@@ -39,7 +39,7 @@ report 50200 "PurisProductionLabels"
                     encodedText: Text;
 
                 begin
-                    encodedText := format('%P') + format("Prod. Order Line"."Prod. Order No.") + format(' ') + format("Prod. Order Line"."Line No.");
+                    encodedText := '%P%' + format("Prod. Order Line"."Prod. Order No.") + ' ' + format("Prod. Order Line"."Line No.");
                     barCodeDotSize := 288;
                     barcodeGenerator.GenerateMatrixBarcode(barcodeData, encodedText, barCodeDotSize, 16);
                 end;
