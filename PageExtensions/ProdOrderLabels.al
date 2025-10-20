@@ -10,6 +10,7 @@ pageextension 50200 PurisProductionLabels extends "Released Production Order"
                 ApplicationArea = All;
                 Caption = 'Puris Production Labels';
                 Image = Production;
+                Visible = ShowProteinsFields;
                 trigger OnAction()
                 var
                     ProdLinesData: Record "Prod. Order Line";
@@ -27,20 +28,13 @@ pageextension 50200 PurisProductionLabels extends "Released Production Order"
         }
     }
 
-    procedure GenerateBarCode()
     var
-        BarCodeRecord: Record "IWX Barcode";
-        Generator: Codeunit "IWX Library - Barcode Gen";
-        prodLineData: Record "Prod. Order Line";
-        tempBlob: Codeunit "Temp Blob";
-        textCodeData: Text;
-    begin
-        // prodLineData.Reset();
-        // prodLineData.SetRange("Prod. Order No.", Rec."No.");
+        ShowProteinsFields: Boolean;
+        CompanyScopeCheck: Codeunit CompanyScopeCheck;
 
-        // repeat
-        //     textCodeData := format('%P') + format(Rec."No.") + format(' ') + format(prodLineData."Line No.");
-        //     Generator.GenerateMatrixBarcode(tempBlob, textCodeData, 144, 16);
-        // until prodLineData.Next() = 0;
+    trigger OnOpenPage()
+    begin
+        ShowProteinsFields := CompanyScopeCheck.isProteins();
+        CurrPage.Update(false);
     end;
 }
