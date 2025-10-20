@@ -1,5 +1,6 @@
 pageextension 50200 PurisProductionLabels extends "Released Production Order"
 {
+
     actions
     {
         addlast("&Print")
@@ -10,13 +11,19 @@ pageextension 50200 PurisProductionLabels extends "Released Production Order"
                 Caption = 'Puris Production Labels';
                 Image = Production;
                 trigger OnAction()
-
+                var
+                    ProdLinesData: Record "Prod. Order Line";
 
                 begin
-
-                    Report.RunModal(Report::PurisProductionLabels, false, false, Rec);
+                    // ProdLinesData.SetRange("Prod. Order No.", Rec."No.");
+                    // if ProdLinesData.FindSet() then begin
+                    Rec.SetRange("No.", Rec."No.");
+                    if Rec.FindSet() then begin
+                        Report.RunModal(Report::PurisProductionLabels, false, false, Rec);
+                    end;
                 end;
             }
+
         }
     }
 

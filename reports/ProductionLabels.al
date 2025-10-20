@@ -8,8 +8,8 @@ report 50200 "PurisProductionLabels"
     {
         dataitem("Production Order"; "Production Order")
         {
-
             column(No_; "No.") { }
+
 
             dataitem("Prod. Order Line"; "Prod. Order Line")
             {
@@ -22,8 +22,15 @@ report 50200 "PurisProductionLabels"
                 column(Location_Code; "Location Code") { }
                 column(Inventory_Posting_Group; "Inventory Posting Group") { }
                 column(Variant_Code; "Variant Code") { }
-
+                column(Line_No_; "Line No.") { }
                 column(barcodeData; barcodeData.Image) { }
+
+                dataitem(Item; Item)
+                {
+                    DataItemLink = "No." = field("Item No.");
+
+                    column(Item_Category_Code; "Item Category Code") { }
+                }
 
                 trigger OnAfterGetRecord()
                 var
@@ -32,10 +39,11 @@ report 50200 "PurisProductionLabels"
                     encodedText: Text;
 
                 begin
-                    encodedText := format('%P') + format("Production Order"."No.") + format(' ') + format("Prod. Order Line"."Line No.");
-                    barCodeDotSize := 144;
+                    encodedText := format('%P') + format("Prod. Order Line"."Prod. Order No.") + format(' ') + format("Prod. Order Line"."Line No.");
+                    barCodeDotSize := 288;
                     barcodeGenerator.GenerateMatrixBarcode(barcodeData, encodedText, barCodeDotSize, 16);
                 end;
+
             }
         }
     }
@@ -51,7 +59,4 @@ report 50200 "PurisProductionLabels"
 
     var
         barcodeData: Record "IWX Barcode" temporary;
-
-
-
 }
