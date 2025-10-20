@@ -1,4 +1,5 @@
-.alpackages/*
-.snapshots/*
+./.alpackages/*.*
+./.snapshots/*.*
 .vscode/settings.json
+.alpackages/*.app
 *.app
