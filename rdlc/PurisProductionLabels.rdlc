@@ -518,7 +518,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!Item_Category_Code.Value="STARCH", "              DW4-   ", IIf(InStr(LCase(Fields!Description.Value),"fines")&gt;0, "              DW6-   ", "              DW -   "))</Value>
+                                  <Value>=IIf(Fields!Item_Category_Code.Value="STARCH", "                  DW4-   ", 
+	IIf(InStr(LCase(Fields!Description.Value),"fines")&gt;0, "                  DW6   ", "                  DW   -   "))</Value>
                                   <Style>
                                     <FontSize>26pt</FontSize>
                                   </Style>
