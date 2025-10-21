@@ -45,8 +45,11 @@ pageextension 50200 PurisProductionLabels extends "Released Production Order"
                                     routingDataError += 1;
                             until routingData.Next() = 0;
 
+                            if routingData.Count() < prodLineData.count() then
+                                routingDataError += 1;
+
                             if routingDataError > 0 then begin
-                                Message('Operation No and Work Center No are missing from %1 lines. Check Routing Information on Line -> Routing');
+                                Message('Operation No and Work Center No are missing from %1 line(s). Check Routing Information on Line -> Routing', (prodLineData.Count() - routingData.Count()));
                             end;
                         end;
 
